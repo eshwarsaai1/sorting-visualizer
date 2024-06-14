@@ -16,7 +16,7 @@ merge.addEventListener("click",mergeHelper);
 bubble.addEventListener("click",bubbleSort);
 selection.addEventListener("click",selectionSort);
 insertion.addEventListener("click",insertionSort);
-quick.addEventListener("click", printArray);
+quick.addEventListener("click", quickhelper);
 
 changeBtn.addEventListener("click", () => {
     clearArray();
@@ -65,13 +65,12 @@ function success() {
 
 function printArray(){
     console.log("array is:");
-    // let ans="";
+    let ans="";
     for (let i = 0; i < len; i++) {
-        console.log(a[i]);
-        // ans+=a[i];
-        // ans+=" ";
+        ans+=arr.children[i].style.height;
+        ans+=" ";
     }
-    // console.log(ans);
+    console.log(ans);
 }
 
 
@@ -117,6 +116,16 @@ async function mergeHelper(){
     success();
 }
 
+async function mergeSort(a,l, r){
+    if(l>=r){
+        return;
+    }
+    var m =l+ parseInt((r-l)/2);
+    await mergeSort(a,l,m);
+    await mergeSort(a,m+1,r);
+    await merger(a,l,m,r);
+    await new Promise(resolve => setTimeout(resolve,100/(speed*(l-r))));
+}
 
 async function merger(a, l, m, r)
 {
@@ -166,16 +175,7 @@ async function merger(a, l, m, r)
         k++;
     }
 }
-async function mergeSort(a,l, r){
-    if(l>=r){
-        return;
-    }
-    var m =l+ parseInt((r-l)/2);
-    await mergeSort(a,l,m);
-    await mergeSort(a,m+1,r);
-    await merger(a,l,m,r);
-    await new Promise(resolve => setTimeout(resolve,100/(speed*(l-r))));
-}
+
 
 async function insertionSort(){
     arr.children[0].style.background = "yellowgreen";
@@ -196,6 +196,55 @@ async function insertionSort(){
         arr.children[i].style.background = "yellowgreen";
     }
 }
+
+
+async function quickhelper(){
+    printArray();
+    await quickSort(a,0,len-1);
+    success();
+    printArray();
+}
+
+async function quickSort(a, low, high) {
+    if (low < high) {
+        let pi = await partition(a, low, high);
+        await quickSort(a, low, pi - 1);
+        await quickSort(a, pi + 1, high);
+    }
+}
+
+
+async function partition(a, low, high) {
+    let pivot = a[high];
+  
+    let i = low - 1;
+  
+    for (let j = low; j <= high - 1; j++) {
+        if (a[j] < pivot) {
+            i++;
+            [a[i], a[j]] = [a[j], a[i]];
+            arr.children[i].style.background = "red";
+            arr.children[j].style.background = "red";
+            let x= arr.children[i].style.height;
+            arr.children[i].style.height = arr.children[j].style.height;
+            arr.children[j].style.height = x;
+            await new Promise(resolve => setTimeout(resolve,100/speed));
+            arr.children[i].style.background = "white";
+            arr.children[j].style.background = "white";
+        }
+    }
+    [a[i + 1], a[high]] = [a[high], a[i + 1]];
+    arr.children[i+1].style.background = "red";
+    arr.children[high].style.background = "red";
+    let x= arr.children[i+1].style.height;
+    arr.children[i+1].style.height = arr.children[high].style.height;
+    arr.children[high].style.height = x;
+    await new Promise(resolve => setTimeout(resolve,100/speed));
+    arr.children[i+1].style.background = "white";
+    arr.children[high].style.background = "white";
+    return i + 1; 
+}
+
 
 
 
