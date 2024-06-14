@@ -25,7 +25,7 @@ body{
     align-items: center;
     justify-content: center;
     /* margin: 0px 20px 0px 20px; */
-    margin: 10px 0px 30px 0px;
+    margin: 10px 0px 10px 0px;
 }
 
 .sort{
@@ -42,7 +42,7 @@ body{
 .change{
     font-weight: 300;
     width: 120px;
-    margin: 0px 0px 5px 10px;
+    margin: 0px 0px 5px 20px;
     padding: none;
     border-radius: 7px;
     border: 1px solid white;

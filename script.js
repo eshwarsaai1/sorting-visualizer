@@ -95,12 +95,12 @@ async function selectionSort(){
     for (let i = 0; i < len; i++) {
         
         let min=i;
-        arr.children[i].style.background = "yellow";
+        // arr.children[i].style.background = "yellow";
         await new Promise(resolve => setTimeout(resolve,100/speed));
         for (let j = i+1; j <len; j++) {
             if(a[j]<a[min]){
-                arr.children[min].style.background = "white";
-                arr.children[j].style.background = "yellow";
+                // arr.children[min].style.background = "white";
+                // arr.children[j].style.background = "yellow";
                 min=j;
             }
         }
