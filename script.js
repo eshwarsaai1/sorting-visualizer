@@ -1,5 +1,6 @@
 let a=new Array();
-
+let speedInput=document.querySelector(".speed");
+let speed=speedInput.value;
 let arr=document.querySelector(".container");
 let size=document.querySelector(".len");
 let len=size.value;
@@ -29,6 +30,12 @@ size.addEventListener("input", () => {
     addElements();
 }
 );
+
+speedInput.addEventListener("input", () => {
+    speed=(speedInput.value)*2;
+    document.querySelector(".speedVal").innerHTML=speedInput.value;
+})
+
 
 function clearArray() {
     arr.innerHTML="";
@@ -90,7 +97,7 @@ async function selectionSort(){
         
         let min=i;
         arr.children[i].style.background = "yellow";
-        await new Promise(resolve => setTimeout(resolve,100));
+        await new Promise(resolve => setTimeout(resolve,100/speed));
         for (let j = i+1; j <len; j++) {
             if(a[j]<a[min]){
                 arr.children[min].style.background = "white";
@@ -139,8 +146,8 @@ async function merger(a, l, m, r)
             arr.children[k].style.height= R[j]+"px";
             j++;
         }
-        arr.children[k].style.background = "yellow";
-        await new Promise(resolve => setTimeout(resolve,100));
+        arr.children[k].style.background = "red";
+        await new Promise(resolve => setTimeout(resolve,100/speed));
         arr.children[k].style.background = "white";
         k++;
     }
@@ -167,7 +174,7 @@ async function mergeSort(a,l, r){
     await mergeSort(a,l,m);
     await mergeSort(a,m+1,r);
     await merger(a,l,m,r);
-    await new Promise(resolve => setTimeout(resolve,(l-r)*20));
+    await new Promise(resolve => setTimeout(resolve,100/(speed*(l-r))));
 }
 
 async function insertionSort(){
@@ -184,7 +191,7 @@ async function insertionSort(){
         a[j+1]=k;
         arr.children[j+1].style.height=p;
         arr.children[j+1].style.background = "red";
-        await new Promise(resolve => setTimeout(resolve,100));
+        await new Promise(resolve => setTimeout(resolve,100/speed));
         arr.children[j+1].style.background = "yellowgreen";
         arr.children[i].style.background = "yellowgreen";
     }
@@ -206,6 +213,6 @@ function swap(first,second){
             arr.children[first].style.background = "white";
             arr.children[second].style.background = "white";
             resolve(true) 
-        },100/len);
+        },100/speed);
     })
 }
