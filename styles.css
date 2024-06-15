@@ -46,5 +46,6 @@ body{
     padding: none;
     border-radius: 7px;
     border: 1px solid white;
-    background-color: gray;
+    background-color: rgb(0, 0, 0);
+    color: white;
 }
