@@ -25,6 +25,7 @@ changeBtn.addEventListener("click", () => {
 
 size.addEventListener("input", () => {
     len=size.value;
+    speed=speed*(Math.floor(len/10) + 1);
     document.querySelector(".lenVal").innerHTML=len;
     clearArray();
     addElements();
@@ -32,7 +33,7 @@ size.addEventListener("input", () => {
 );
 
 speedInput.addEventListener("input", () => {
-    speed=(speedInput.value)*2;
+    speed=(speedInput.value)*(Math.floor(len/10) + 1);
     document.querySelector(".speedVal").innerHTML=speedInput.value;
 })
 
@@ -96,7 +97,7 @@ async function selectionSort(){
         
         let min=i;
         // arr.children[i].style.background = "yellow";
-        await new Promise(resolve => setTimeout(resolve,100/speed));
+        await new Promise(resolve => setTimeout(resolve,1000/speed));
         for (let j = i+1; j <len; j++) {
             if(a[j]<a[min]){
                 // arr.children[min].style.background = "white";
@@ -124,7 +125,7 @@ async function mergeSort(a,l, r){
     await mergeSort(a,l,m);
     await mergeSort(a,m+1,r);
     await merger(a,l,m,r);
-    await new Promise(resolve => setTimeout(resolve,100/(speed*(l-r))));
+    await new Promise(resolve => setTimeout(resolve,1000/(speed*(r-l))));
 }
 
 async function merger(a, l, m, r)
@@ -156,7 +157,7 @@ async function merger(a, l, m, r)
             j++;
         }
         arr.children[k].style.background = "red";
-        await new Promise(resolve => setTimeout(resolve,100/speed));
+        await new Promise(resolve => setTimeout(resolve,1000/speed));
         arr.children[k].style.background = "white";
         k++;
     }
@@ -191,7 +192,7 @@ async function insertionSort(){
         a[j+1]=k;
         arr.children[j+1].style.height=p;
         arr.children[j+1].style.background = "red";
-        await new Promise(resolve => setTimeout(resolve,100/speed));
+        await new Promise(resolve => setTimeout(resolve,1000/speed));
         arr.children[j+1].style.background = "yellowgreen";
         arr.children[i].style.background = "yellowgreen";
     }
@@ -228,7 +229,7 @@ async function partition(a, low, high) {
             let x= arr.children[i].style.height;
             arr.children[i].style.height = arr.children[j].style.height;
             arr.children[j].style.height = x;
-            await new Promise(resolve => setTimeout(resolve,100/speed));
+            await new Promise(resolve => setTimeout(resolve,1000/speed));
             arr.children[i].style.background = "white";
             arr.children[j].style.background = "white";
         }
@@ -239,7 +240,7 @@ async function partition(a, low, high) {
     let x= arr.children[i+1].style.height;
     arr.children[i+1].style.height = arr.children[high].style.height;
     arr.children[high].style.height = x;
-    await new Promise(resolve => setTimeout(resolve,100/speed));
+    await new Promise(resolve => setTimeout(resolve,1000/speed));
     arr.children[i+1].style.background = "white";
     arr.children[high].style.background = "white";
     return i + 1; 
@@ -262,6 +263,6 @@ function swap(first,second){
             arr.children[first].style.background = "white";
             arr.children[second].style.background = "white";
             resolve(true) 
-        },100/speed);
+        },1000/speed);
     })
 }
